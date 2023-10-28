@@ -1,4 +1,5 @@
 -- 1. Can a user show up more than once in the activity table? 
+
 select 
 	uid,
  	count(spent) as purchased
@@ -9,6 +10,7 @@ having count(spent) > 1
 -------------------------------------------------------------------
 
 -- 2. What type of join should we use to join the users table to the activity table?
+
 select distinct users.id, 
 users.country, 
 users.gender, 
@@ -21,6 +23,7 @@ group by 1,2,3,4
 -------------------------------------------------------------------
 
 -- 3. What SQL function can we use to fill in NULL values?
+
 select
 	distinct u.id,
   u.country,
@@ -32,6 +35,7 @@ group by 1,2,3
 -------------------------------------------------------------------
 
 -- 4. What are the start and end dates of the experiment?
+
 select
 	min(join_dt) as start_date,
   max(join_dt) as end_date
@@ -39,12 +43,14 @@ from groups
 -------------------------------------------------------------------
 
 -- 5. How many total users were in the experiment?
+
 select
 	count(distinct id) as total_users
 from users
 -------------------------------------------------------------------
 
 -- 6. How many users were in the control and treatment groups?
+
 select
 	case when groups.group = 'A' then 'Control'
   	else 'Treatment' end as group,
@@ -54,6 +60,7 @@ group by 1
 -------------------------------------------------------------------
 
 -- 7. What was the conversion rate of all users?
+
 with cte as (
 select
 	case when a.spent is NOT NULL then 1
